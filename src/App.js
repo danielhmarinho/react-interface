@@ -1,18 +1,52 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:4568';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      organizations: []
+    }
+  }
+
+  organizationsList(){
+    return (
+      <ul>
+        {this.state.organizations.map(organization =>
+          <li key={organization.id}>{organization.name}
+            <div>
+            {organization.phone}
+            </div>
+            <div>
+            {organization.address}
+            </div>
+          </li>
+        )}
+      </ul>
+    );
+  }
+
+  componentDidMount() {
+      axios.get('/organizations')
+        .then(response => response.data)
+          .then(organizations => {
+            this.setState({ organizations });
+            console.log(organizations)
+          })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+      {this.organizationsList()}
       </div>
     );
   }
