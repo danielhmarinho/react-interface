@@ -1,55 +1,18 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DrawerMenu from './components/DrawerMenu';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-axios.defaults.baseURL = 'http://localhost:4568';
+const App = () => (
+    <MuiThemeProvider>
+        <DrawerMenu/>
+    </MuiThemeProvider>
+);
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+injectTapEventPlugin();
 
-    this.state = {
-      organizations: []
-    }
-  }
-
-  organizationsList(){
-    return (
-      <ul>
-        {this.state.organizations.map(organization =>
-          <li key={organization.id}>{organization.name}
-            <div>
-            {organization.phone}
-            </div>
-            <div>
-            {organization.address}
-            </div>
-          </li>
-        )}
-      </ul>
-    );
-  }
-
-  componentDidMount() {
-      axios.get('/organizations')
-        .then(response => response.data)
-          .then(organizations => {
-            this.setState({ organizations });
-            console.log(organizations)
-          })
-        .catch(err => {
-          console.error(err);
-        });
-    }
-
-  render() {
-    return (
-      <div>
-      {this.organizationsList()}
-      </div>
-    );
-  }
-}
+ReactDOM.render(
+    <App/>, document.getElementById('root'));
 
 export default App;
