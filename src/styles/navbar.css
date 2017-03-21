@@ -20,7 +20,7 @@ body {
     margin: 0
 }
 
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+article, aside, details, figcaption, figure, header, main, menu, nav, section, summary {
     display: block
 }
 
@@ -2191,4 +2191,14 @@ input[type=checkbox].w3-check:disabled+.w3-validate, input[type=radio].w3-radio:
 
 .w3-border-pale-blue, .w3-hover-border-pale-blue:hover {
     border-color: #e7ffff!important
+}
+
+.footer {
+    padding: 1em;
+    color: white;
+    margin-top: 230px;
+    background-color: black;
+    clear: left;
+    text-align: center;
+    display: block;
 }
